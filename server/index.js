@@ -7,14 +7,14 @@ const port = 3000;
 const expressStaticGzip =require("express-static-gzip");
 
 app.use(bodyParser.json());
-// app.use('/:listingID',express.static("public"));
-app.use('/:listingID', expressStaticGzip('public', {
-    enableBrotli: true,
-    orderPreference: ['br', 'gz'],
-    setHeaders: function (res, path) {
-       res.setHeader("Cache-Control", "public, max-age=31536000");
-    }
- }));
+app.use('/:listingID',express.static("public"));
+// app.use('/:listingID', expressStaticGzip('public', {
+//     enableBrotli: true,
+//     orderPreference: ['br', 'gz'],
+//     setHeaders: function (res, path) {
+//        res.setHeader("Cache-Control", "public, max-age=31536000");
+//     }
+// }));
 
 app.get('/listing/desc/:listingID',(req,res)=>{
     var id = req.params.listingID

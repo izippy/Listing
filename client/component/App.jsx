@@ -31,6 +31,7 @@ class App extends React.Component {
             url: `/listing/desc/${id}`,
             contentType: 'application/json',
             success: (desc)=>{
+                console.log(desc)
                 this.setState({
                     title: desc.title,
                     location: desc.location,
@@ -51,6 +52,7 @@ class App extends React.Component {
             url: `/listing/amenity/${id}`,
             contentType: 'application/json',
             success: (amenity)=>{
+                console.log(amenity)
                 this.setState({
                     amenity: amenity.amenities
                 })

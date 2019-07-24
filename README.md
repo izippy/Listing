@@ -2,7 +2,9 @@
 
 ## CRUD Operations
 *Serve static files*
-`rooms/listing/:listingID`
+```
+rooms/listing/:listingID
+```
 
 *Description*
 

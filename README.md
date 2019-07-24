@@ -1,7 +1,7 @@
 # Listing Microservice
 
 ## Static Files
-`app.use`: `rooms/listing/:listingID`
+Use to serve static files: `rooms/listing/:listingID`
 
 
 ## CRUD Operations

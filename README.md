@@ -1,7 +1,7 @@
 # Listing
 
 ## CRUD Operations
-* APP.USE: `rooms/<service>/:listingID`
+* `app.use`: `rooms/<service>/:listingID`
 
 *Description*
 | CRUD    | METHOD  | ENDPOINT                              | ACTION                                      |

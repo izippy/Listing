@@ -5,7 +5,7 @@
 
 *Description*
 | CRUD    | METHOD  | ENDPOINT                              | ACTION                                      |
-| ------- |:-------:|:-------------------------------------:|--------------------------------------------:|
+|:-------:|:-------:|:-------------------------------------:|:-------------------------------------------:|
 | Create  | POST    | `/api/rooms/listing/desc:listingID`   | Create new description for a listing        |
 | Read    | GET     | `/api/rooms/listing/desc:listingID`   | Read description for a listing              |
 | Update  | PUT     | `/api/rooms/listing/desc:listingID`   | Update description for a listing            |

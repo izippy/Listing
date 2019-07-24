@@ -1,10 +1,8 @@
 # Listing Microservice
 
-## Static Files
-Use to serve static files: `rooms/listing/:listingID`
-
-
 ## CRUD Operations
+*Serve static files*
+`rooms/listing/:listingID`
 
 *Description*
 

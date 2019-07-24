@@ -15,12 +15,12 @@
 
 *Amenity*
 
-| CRUD    | METHOD  | ENDPOINT                                 | ACTION                                   |
-| ------- |:-------:|:----------------------------------------:|-----------------------------------------:|
-| Create  | POST    | `/api/rooms/listing/amenity:listingID`   | Create new amenity for a listing         |
-| Read    | GET     | `/api/rooms/listing/amenity:listingID`   | Read amenity for a listing               |
-| Update  | PUT     | `/api/rooms/listing/amenity:listingID`   | Update amenity for a listing             |
-| Update  | PATCH   | `/api/rooms/listing/amenity:listingID`   | Update part of amenity for a listing     |
-| Delete  | DELETE  | `/api/rooms/listing/amenity:listingID`   | Delete amenity for a listing             |
+| CRUD    | METHOD  | ENDPOINT                              | ACTION                                   |
+|:------- |:--------|:--------------------------------------|:-----------------------------------------|
+| Create  | POST    | `/api/rooms/listing/amenity:listingID`| Create new amenity for a listing         |
+| Read    | GET     | `/api/rooms/listing/amenity:listingID`| Read amenity for a listing               |
+| Update  | PUT     | `/api/rooms/listing/amenity:listingID`| Update amenity for a listing             |
+| Update  | PATCH   | `/api/rooms/listing/amenity:listingID`| Update part of amenity for a listing     |
+| Delete  | DELETE  | `/api/rooms/listing/amenity:listingID`| Delete amenity for a listing             |
 
 

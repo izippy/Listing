@@ -79,6 +79,7 @@ class Description extends React.Component{
             var bedroomnum = detail.bedrmnum;
             var beds = detail.beds
         }
+        console.log("beds: ", beds);
         // sleeping arrangement 
         var arrgs= [];
         var bedicons = {

@@ -16,7 +16,7 @@ const maketable_host = (i) => {
 }
 
 const write10MTimes = () => {
-  let i = 100;
+  let i = 1000;
   write();
   function write() {
     let ok = true;

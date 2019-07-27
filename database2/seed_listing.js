@@ -1,87 +1,9 @@
 const fs = require('fs');
 const faker = require('faker');
 
-let csvname = 'cookiemonster.csv'
+let csvname = 'listing.csv'
 let writer = fs.createWriteStream(csvname);
 let recordcount = 0;
-
-const generateBdrmnum = (type) => {
-  let bedrmnum;
-  if (type === 1) {   // 'Entire place'
-    bedrmnum = faker.random.number({min:3, max:6});
-  } else if (type === 2) {   // 'Private room'
-    bedrmnum = 1;
-  } else if (type === 3) {   // 'Hotel room'
-    bedrmnum = faker.random.number({min:1, max:3});
-  } else if (type === 4) {   // 'Shared room'
-    bedrmnum = 1;
-  }
-  return bedrmnum;
-};
-
-const generateBathrmnum = (type, bedrmnum) => {
-  let bathrmnum;
-  if (type === 1) {   // 'Entire place'
-    bathrmnum = faker.random.number({min:1, max:bedrmnum});
-  } else if (type === 2) {   // 'Private room'
-    bathrmnum = 1;
-  } else if (type === 3) {   // 'Hotel room'
-    bathrmnum = faker.random.number({min:1, max:bedrmnum});
-  } else if (type === 4) {   // 'Shared room'
-    bathrmnum = 1;
-  }
-  return bathrmnum;
-};
-
-const generateGuestmax = (type, bedrmnum) => {
-  let guestmax;
-  if (type === 1) {   // 'Entire place'
-    guestmax = faker.random.number({min:bedrmnum, max:bedrmnum*2+2});
-  } else if (type === 2) {   // 'Private room'
-    guestmax = faker.random.number({min:1, max:3});
-  } else if (type === 3) {   // 'Hotel room'
-    guestmax = faker.random.number({min:bedrmnum, max:bedrmnum*2+2});
-  } else if (type === 4) {   // 'Shared room'
-    guestmax = faker.random.number({min:1, max:bedrmnum*4});
-  }
-  return guestmax;
-};
-
-const generateBeds = (type, bedrmnum) => {
-  const bedoptions = ['1 queen bed','1 single bed','1 king bed','2 single beds']
-  let beds = []
-  if (type === 1) { // 'Entire place'
-    for (let i = 0; i < bedrmnum; i++) {
-      let currBedoption = bedoptions[Math.floor(Math.random() * bedoptions.length)];
-      beds.push(`'${currBedoption}'`);
-    }
-  } else if (type === 2) {  // 'Private room'
-    beds = `'${bedoptions[Math.floor(Math.random()*bedoptions.length)]}'`;
-  } else if (type === 3) {   // 'Hotel room'
-    for (let i = 0; i < bedrmnum; i++) {
-      let currBedoption = bedoptions[Math.floor(Math.random() * bedoptions.length)]
-      beds.push(`'${currBedoption}'`);
-    }
-  } else if (type === 4) {   // 'Shared room'
-    beds = `'${bedoptions[Math.floor(Math.random()*bedoptions.length)]}'`;
-  }
-  let bedsArr = `[${beds}]`
-  return bedsArr;
-};
-
-const generateBednum = () => {
-  let bednum;
-  if (type === 1) {   // 'Entire place'
-    guestmax = faker.random.number({min:bedrmnum, max:bedrmnum*2+2});
-  } else if (type === 2) {   // 'Private room'
-    guestmax = faker.random.number({min:1, max:3});
-  } else if (type === 3) {   // 'Hotel room'
-    guestmax = faker.random.number({min:bedrmnum, max:bedrmnum*2+2});
-  } else if (type === 4) {   // 'Shared room'
-    guestmax = faker.random.number({min:1, max:bedrmnum*4});
-  }
-  return guestmax;
-}
 
 const generateAccomodation = (type) => {
   let accomodation = {};
@@ -165,13 +87,7 @@ const maketable_listing = (i) => {
   // const beds = generateBeds(type, bedrmnum);
   // const bednum = ;
   const accomodations = generateAccomodation(type);
-  const allLines = (
-    `#${recordcount}: LISTINGID${listingid}|TITLE${title}|${location}|
-    ${host_id}|${general}|${thespace}|${guestaccess}|
-    ${interactionwithguests}|${otherthings}|${license}|${type}|
-    ${accomodations.bedrmnum}|${accomodations.bathrmnum}|
-    ${accomodations.guestmax}|${accomodations.beds}|${accomodations.bednum}\n`
-    );
+  const allLines = `${listingid}|${title}|${location}|${host_id}|${general}|${thespace}|${guestaccess}|${interactionwithguests}|${otherthings}|${license}|${type}|${accomodations.bedrmnum}|${accomodations.bathrmnum}|${accomodations.guestmax}|${accomodations.beds}|${accomodations.bednum}\n`;
   return allLines;
 }
 

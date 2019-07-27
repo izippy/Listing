@@ -81,11 +81,6 @@ const maketable_listing = (i) => {
   const otherthings = faker.lorem.sentences();
   const license = `STR-${faker.random.number({min:1000000, max:9999999})}`;
   const type = faker.random.number({min:1, max:4}); // 4 types of places, see maketable_unit_type
-  // const bedrmnum = generateBdrmnum(type);
-  // const bathrmnum = generateBathrmnum(type, bedrmnum);
-  // const guestmax = generateGuestmax(type, bedrmnum);
-  // const beds = generateBeds(type, bedrmnum);
-  // const bednum = ;
   const accomodations = generateAccomodation(type);
   const allLines = `${listingid}|${title}|${location}|${host_id}|${general}|${thespace}|${guestaccess}|${interactionwithguests}|${otherthings}|${license}|${type}|${accomodations.bedrmnum}|${accomodations.bathrmnum}|${accomodations.guestmax}|${accomodations.beds}|${accomodations.bednum}\n`;
   return allLines;

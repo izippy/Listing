@@ -148,7 +148,8 @@ const generateAccomodation = (type) => {
 }
 
 const maketable_listing = (i) => {
-  const title = faker.lorem.words;
+  const listingid = i + 1;
+  const title = faker.lorem.words();
   const general = faker.lorem.sentences();
   const location = faker.address.city();
   const host_id = faker.random.number({min:1, max:i});
@@ -165,23 +166,13 @@ const maketable_listing = (i) => {
   // const bednum = ;
   const accomodations = generateAccomodation(type);
   const allLines = (
-    `#${recordcount}: ${i}|${title}|${location}|${general}|${thespace}|${guestaccess}|
+    `#${recordcount}: LISTINGID${listingid}|TITLE${title}|${location}|
+    ${host_id}|${general}|${thespace}|${guestaccess}|
     ${interactionwithguests}|${otherthings}|${license}|${type}|
     ${accomodations.bedrmnum}|${accomodations.bathrmnum}|
     ${accomodations.guestmax}|${accomodations.beds}|${accomodations.bednum}\n`
     );
   return allLines;
-}
-
-// const join_listing_highlights = () => {
-//   const id = i + 1;
-//   const listing_id = i + 1
-//   const highlight_id = // BUNCH OF NUMBERS??? 
-// }
-
-const highlights = () => {
-  const id = 1
-  const arr_highlight_item = ['living space', 'sparkling', 'selfcheckin', 'greatlocation', 'superhost', 'greatcheckin']
 }
 
 const write10MTimes = () => {
@@ -193,12 +184,12 @@ const write10MTimes = () => {
     do {
       i--;
       if (i === 0) {
-        let data = maketable_listing();
+        let data = maketable_listing(i);
         recordcount++;
         writer.write(data, 'utf8');
       } else {
         // we're not done yet.
-        let data = maketable_listing();
+        let data = maketable_listing(i);
         recordcount++;
         ok = writer.write(data, 'utf8');
       }

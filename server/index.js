@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const db = require('../database')
-const port = 3000;
+const port = 3005;
 const expressStaticGzip =require("express-static-gzip");
 
 app.use(bodyParser.json());
@@ -22,7 +22,7 @@ app.get('/listing/desc/:listingID',(req,res)=>{
         if(err){
             res.status(500).send(err);
         } else {
-            console.log(data)
+            // console.log(data)
             if (data.length) {
                 res.json(data[0])
             } else {

@@ -10,7 +10,6 @@ const write1Time = () => {
   write();
 
   function write() {
-    let ok = true;
     const unit_types = ['Entire place', 'Private room', 'Hotel room', 'Shared room'] // 4 types of places
     let data;
     for (let j = 0; j < unit_types.length; j++) {

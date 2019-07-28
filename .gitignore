@@ -1,2 +1,8 @@
 node_modules
 .DS_Store
+database2/amenCategories.csv
+database2/highlights.csv
+database2/joinListingHighlights.csv
+database2/listing.csv
+database2/unitType.csv
+database2/user.csv

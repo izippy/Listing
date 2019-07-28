@@ -22,7 +22,7 @@ let glistingcount = 0;
 // });
 
 // helper functions to generate all amenities categories
-const generateBasic = (i) => {
+const generateBasic = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 1;
   const items = ['Wifi', 'TV', 'Iron', 'Air conditioning', 'Laptop friendly workspace', 'Heating', 'Hot water', 'Washer', 'Essentials'];
@@ -36,37 +36,37 @@ const generateBasic = (i) => {
     } else if (items[j] === 'Washer') {
       item = 'Washer';
       description = 'In the building, free or for a fee';
-    } else if (items[i] === 'Essentials') {
+    } else if (items[j] === 'Essentials') {
       item = 'Essentials';
       description = 'Towels, bed sheets, soap, and toilet paper';
     } else {
       item = items[j];
       description = 'NULL';
     }
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateNotincluded = (i) => {
+const generateNotincluded = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 2;
-  const items = ['Wifi', 'TV', 'Iron', 'Air conditioning', 'Laptop friendly workspace', 'Heating', 'Hot water', 'Washer', 'Hair dryer'];
+  const items = ['Wifi', 'TV', 'Iron', 'Air conditioning', 'Laptop friendly workspace', 'Heating', 'Hot water', 'Washer', 'Essentials'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateGuestaccess = (i) => {
+const generateGuestaccess = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 3;
   const items = ['Host greets you', 'Private entrance', 'Lockbox'];
@@ -78,78 +78,78 @@ const generateGuestaccess = (i) => {
       item = items[j];
       description = 'NULL';
     }
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateBedandbath = (i) => {
+const generateBedandbath = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 4;
   const items = ['Bed linens', 'Extra pillows', 'Hair dryer', 'Hangers', 'Shampoo'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateSafetyfeatures = (i) => {
+const generateSafetyfeatures = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 5;
   const items = ['Smoke detector', 'Fire extinguisher', 'Carbon monoxide detector', 'First aid kit'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateFamilyfeatures = (i) => {
+const generateFamilyfeatures = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 6;
   const items = ['Bathtub', 'Room-darkening shades', 'Game console', 'Crib'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateOutdoor = (i) => {
+const generateOutdoor = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 7;
   const items = ['Patio or balcony', 'Garden or backyard', 'BBQ grill'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateDining = (i) => {
+const generateDining = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 8;
-  const items = ['Kitchen', 'Microwave', 'Coffee maker', 'Dishes', 'Stove'];
+  const items = ['Kitchen', 'Microwave', 'Coffee maker', 'Dishes', 'Stove', 'Oven'];
   for (let j = 0; j < items.length; j++) {
     if (items[j] === 'Kitchen') {
       item = 'Kitchen';
@@ -158,15 +158,15 @@ const generateDining = (i) => {
       item = items[j];
       description = 'NULL';
     }
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateLogistics = (i) => {
+const generateLogistics = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 9;
   const items = ['Luggage dropoff', 'Long term stays'];
@@ -178,15 +178,15 @@ const generateLogistics = (i) => {
       item = items[j];
       description = 'NULL';
     }
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
-const generateFacilities = (i) => {
+const generateFacilities = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 10;
   const items = ['Free parking', 'Hot tub', 'Free street parking', 'Pool', 'Gym'];
@@ -201,23 +201,91 @@ const generateFacilities = (i) => {
       item = items[j];
       description = 'NULL';
     }
-    line = `${i}|${amen_cat_id}|${item}|${description}\n`;
+    line = `${obj.i}|${amen_cat_id}|${item}|${description}\n`;
     allLines += line;
-    i++;
+    obj.i++;
     glistingcount++;
   }
   return allLines;
 };
 
+/* METHOD A
 const write1Time = () => {
   let i = 0;
-  let ok = true;
   let data = '';
   
+  const drain = () => {
+    return new Promise((resolve) => {
+      writer.once('drain', resolve);
+    });
+  }
+  
+  const writeAmenityCategories = async (i) => {
+    let ok = true;
+    
+    while (ok) {
+      data = generateBasic(i);
+      ok = writer.write(data, 'utf8');
+      console.log("ok1: ", !!ok)
+  
+      data = generateNotincluded(i);
+      ok = writer.write(data, 'utf8');
+      console.log("ok2: ", !!ok)
+  
+      data = generateGuestaccess(i);
+      ok = writer.write(data, 'utf8');
+      console.log("ok3: ", !!ok)
+  
+      data = generateBedandbath(i);
+      ok = writer.write(data, 'utf8');
+      console.log("ok4: ", !!ok)
+  
+      data = generateSafetyfeatures(i);
+      ok = writer.write(data, 'utf8');
+      console.log("ok5: ", !!ok)
+  
+      data = generateFamilyfeatures(i);
+      ok = writer.write(data, 'utf8');
+      console.log("ok6: ", !!ok)
+  
+      data = generateOutdoor(i);
+      ok = writer.write(data, 'utf8');
+            console.log("ok7: ", !!ok)
+  
+      data = generateDining(i);
+      ok = writer.write(data, 'utf8');
+            console.log("ok8: ", !!ok)
+  
+      data = generateLogistics(i);
+      ok = writer.write(data, 'utf8');
+            console.log("ok9: ", !!ok)
+  
+      data = generateFacilities(i);
+      ok = writer.write(data, 'utf8');
+            console.log("ok0: ", !!ok)
+    }
+
+    if (!ok) {
+      // Had to stop early. Write some more once it drains.
+      await drain();
+    }
+    
+    writer.end();
+  }
+
+  writeAmenityCategories(i);
+}
+*/
+
+/* METHOD B
+const write1Time = () => {
+  let i = 0;
+  let data = '';
+  let ok = true;
+
   writeAmenityCategories();
 
   function writeAmenityCategories() {
-
     // while ok is true (no drain)
     while (ok) {
       data = generateBasic(i);
@@ -253,15 +321,56 @@ const write1Time = () => {
 
     if (!ok) {
       // Had to stop early. Write some more once it drains.
-      writer.once('drain', writeListings);
+      writer.once('drain', writeAmenityCategories);
     }
 
     if (i === max) {
       writer.end();
     }
   };
-};
+  
+  if (!ok) {
+    // Had to stop early. Write some more once it drains.
+    await drain();
+  }
+  
+  writer.end();
 
+}
+*/
+
+const write1Time = () => {
+  let idcount = { i: 1 };
+  let finalData = '';
+
+  generateAmenities(idcount);
+
+  function generateAmenities(obj){
+    data1 = generateBasic(idcount);
+    data2 = generateNotincluded(idcount);
+    data3 = generateGuestaccess(idcount);
+    data4 = generateBedandbath(idcount);
+    data5 = generateSafetyfeatures(idcount);
+    data6 = generateFamilyfeatures(idcount);
+    data7 = generateOutdoor(idcount);
+    data8 = generateDining(idcount);
+    data9 = generateLogistics(idcount);
+    data0 = generateFacilities(idcount);
+  }
+
+  finalData = data1 + data2 + data3 + data4 + data5 + data6 + data7 + data8 + data9 + data0;
+  console.log("i total:", idcount.i)
+  console.log(finalData);
+
+  writer.write(finalData, 'utf8', (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      writer.end();
+    }
+  });
+}
+ 
 write1Time();
 
 writer.on('finish', ()  => {

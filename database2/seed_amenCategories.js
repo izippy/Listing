@@ -1,20 +1,20 @@
 const fs = require('fs');
 const faker = require('faker');
 
-let csvname = 'amenCategories.csv'
+let csvname = 'amenitiesCategories.csv'
 let writer = fs.createWriteStream(csvname);
-let recordcount = 0;
+let grecordcount = 0;
 
 const write1Time = () => {
   write();
   function write() {
-    const amenCategories = ['Basic', 'Not included','Dining','Guest access','Bed and bath','Outdoor','Safety features','Logistics', 'Facilities','Family features'];
+    const amenCategories = ['Basic', 'Not included','Guest access','Bed and bath','Safety features','Family features','Outdoor','Dining', 'Logistics','Facilities'];
     let data;
-    for (let j = 0; j < amenCategories.length; j++) {
-      const amenCategories_id = j + 1;
-      const amenCat = amenCategories[j];
-      data = `${amenCategories_id}|${amenCat}\n`;
-      recordcount++;
+    for (let i = 0; i < amenCategories.length; i++) {
+      const id = i + 1;
+      const amenCategory = amenCategories[i];
+      data = `${id}|${amenCategory}\n`;
+      grecordcount++;
       writer.write(data, 'utf8');
     }
     writer.end();
@@ -24,5 +24,5 @@ const write1Time = () => {
 write1Time();
 
 writer.on('finish', ()  => {
-  console.log(`${recordcount} data written to ${csvname}`)
+  console.log(`${grecordcount} data written to ${csvname}`)
 });

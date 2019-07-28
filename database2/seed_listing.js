@@ -37,7 +37,7 @@ const generateAccomodation = (type) => {
     guestmax = faker.random.number({min:bedrmnum, max:bedrmnum*2+2});
     for (let i = 0; i < bedrmnum; i++) {
       let currBedoption = bedoptions[Math.floor(Math.random() * bedoptions.length)];
-      // console.log("YO1 currBedoption SLICED", currBedoption.slice(0,1));
+      // console.log("type1 currBedoption sliced", currBedoption.slice(0,1));
       bedcounter += Number(currBedoption.slice(0,1));
       beds.push(`${currBedoption}`);
     }
@@ -61,7 +61,7 @@ const generateAccomodation = (type) => {
     guestmax = faker.random.number({min:bedrmnum, max:bedrmnum*2+2});
     for (let i = 0; i < bedrmnum; i++) {
       let currBedoption = bedoptions[Math.floor(Math.random() * bedoptions.length)];
-      // console.log("type3 currBedoption SLICED", currBedoption.slice(0,1));
+      // console.log("type3 currBedoption sliced", currBedoption.slice(0,1));
       bedcounter += Number(currBedoption.slice(0,1));
       beds.push(`${currBedoption}`);
     }
@@ -103,42 +103,43 @@ const maketable_listing = (i) => {
   return allLines;
 }
 
-const write10MTimes = () => {
-  const max = 10;
+const writeMaxTimes = () => {
+  const max = 50;
   let i = 0;
+  let ok = true;
   
-  write();
-  function write() {
-    let ok = true;
-    
-    do {
-      if (i === max) {
-        let data = maketable_listing(i);
-        recordcount++;
-        writer.write(data, 'utf8');
-      } else {
-        // for long writes, check progress
-        if (i % 100000 === 0){
-          console.log(i);
-        }
-        
-        // not done yet...
-        let data = maketable_listing(i);
-        recordcount++;
-        ok = writer.write(data, 'utf8');
-        i++;
+  writeListings();
+
+  function writeListings() {
+    while (i < max) {
+      let data = maketable_listing(i);
+      recordcount++;
+      ok = writer.write(data, 'utf8');
+      i++;
+
+      // drain is needed if ok is false
+      if (!ok) {
+        break;
       }
-    } while (i < max && ok);
-    if (i < max) {
-      // Had to stop early! Write some more once it drains.
-      writer.once('drain', write);
-    } else if (i === max) {
+
+      // for long writes, check progress
+      if (i % 100000 === 0){
+        console.log(i);
+      }
+    }
+
+    if (!ok) {
+      // Had to stop early. Write some more once it drains.
+      writer.once('drain', writeListings);
+    }
+
+    if (i === max) {
       writer.end();
     }
   };
 };
 
-write10MTimes();
+writeMaxTimes();
 
 writer.on('finish', ()  => {
   console.log(`${recordcount} data written to ${csvname}`)

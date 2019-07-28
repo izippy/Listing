@@ -4,7 +4,7 @@ const db = require('./index.js');
 
 let csvname = 'listing.csv'
 let writer = fs.createWriteStream(csvname);
-let recordcount = 0;
+let glistingcount = 0;
 
 // STEP 1: POSTGRES > connect izippy
 // STEP 2: 'node seed_listing.js' to (1) populate csv and (2) create table listing
@@ -113,8 +113,8 @@ const writeMaxTimes = () => {
   function writeListings() {
     while (i < max) {
       let data = maketable_listing(i);
-      recordcount++;
       ok = writer.write(data, 'utf8');
+      glistingcount++;
       i++;
 
       // drain is needed if ok is false
@@ -142,5 +142,5 @@ const writeMaxTimes = () => {
 writeMaxTimes();
 
 writer.on('finish', ()  => {
-  console.log(`${recordcount} data written to ${csvname}`)
+  console.log(`${glistingcount} data written to ${csvname}`)
 });

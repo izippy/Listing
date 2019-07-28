@@ -117,6 +117,11 @@ const write10MTimes = () => {
         recordcount++;
         writer.write(data, 'utf8');
       } else {
+        // for long writes, check progress
+        if (i % 100000 === 0){
+          console.log(i);
+        }
+        
         // not done yet...
         let data = maketable_listing(i);
         recordcount++;

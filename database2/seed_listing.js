@@ -6,7 +6,6 @@ let csvname = 'listing.csv'
 let writer = fs.createWriteStream(csvname);
 let recordcount = 0;
 
-
 // STEP 1: POSTGRES > connect izippy
 // STEP 2: 'node seed_listing.js' to (1) populate csv and (2) create table listing
 // STEP 3: pv in new terminal to pipe in with progress bar outside of postgres
@@ -18,7 +17,6 @@ db.query(schemaListing, (err, res) => {
   if (err) {
     console.log("err", err);
   } else {
-    // console.log(res);
     console.log(`${csvname} table created`);
   }
   db.end();
@@ -106,28 +104,30 @@ const maketable_listing = (i) => {
 }
 
 const write10MTimes = () => {
-  let i = 10;
+  const max = 10;
+  let i = 0;
+  
   write();
   function write() {
     let ok = true;
     
     do {
-      i--;
-      if (i === 0) {
+      if (i === max) {
         let data = maketable_listing(i);
         recordcount++;
         writer.write(data, 'utf8');
       } else {
-        // we're not done yet.
+        // not done yet...
         let data = maketable_listing(i);
         recordcount++;
         ok = writer.write(data, 'utf8');
+        i++;
       }
-    } while (i > 0 && ok);
-    if (i > 0) {
+    } while (i < max && ok);
+    if (i < max) {
       // Had to stop early! Write some more once it drains.
       writer.once('drain', write);
-    } else if (i === 0) {
+    } else if (i === max) {
       writer.end();
     }
   };

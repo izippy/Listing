@@ -81,7 +81,7 @@ const writeMaxTimes = () => {
       let availablecategories = [3, 4, 5, 6, 7, 8, 9, 10];
       let mixedcategories = availablecategories.sort(() => Math.random()-0.5); 
       // let maxmixedcategories = Math.floor(Math.random() * availablecategories.length) + 1; // random number from 1 to 8
-      let maxmixedcategories = Math.floor(Math.random() * 2) + 1; // random number from 1 to 2
+      let maxmixedcategories = Math.floor(Math.random() * 4) + 1; // random number from 1 to 4
       let usedcategories = mixedcategories.slice(0, maxmixedcategories);
       
       // build object of usedcategories and their values of array amenityitems
@@ -96,8 +96,7 @@ const writeMaxTimes = () => {
       for (let cat in usedcategoriesobj) {
         availableitems = usedcategoriesobj[cat]; // [1, 2, 3, 4, 5]
         mixeditems = availableitems.sort(() => Math.random()-0.5); // mix order of used items [3, 1, 4, 5, 2]
-        // maxmixeditems = Math.floor(Math.random() * availableitems.length) + 1; // random number from mixed used items, 2
-        maxmixeditems = Math.floor(Math.random() * availableitems.length) + 1; // random number from 1 to 2, 2
+        maxmixeditems = Math.floor(Math.random() * availableitems.length) + 1; // random number from mixed used items, 2
         useditems = mixeditems.slice(0, maxmixeditems); // [3, 1]
 
         for (let i = 0; i < useditems.length; i++) {

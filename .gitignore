@@ -1,8 +1,10 @@
 node_modules
 .DS_Store
+database2/amenities.csv
+database2/amenitiesCategories.csv
 database2/highlights.csv
+database2/joinListingAmenities.csv
 database2/joinListingHighlights.csv
 database2/listing.csv
 database2/unitType.csv
-database2/user.csv
-database2/amenitiesCategories.csv
+database2/users.csv

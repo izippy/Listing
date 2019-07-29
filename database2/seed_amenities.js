@@ -25,7 +25,7 @@ let glistingcount = 0;
 const generateBasic = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 1;
-  const items = ['Wifi', 'TV', 'Iron', 'Air conditioning', 'Laptop friendly workspace', 'Heating', 'Hot water', 'Washer', 'Essentials'];
+  const items = ['Wifi', 'TV', 'Air conditioning', 'Laptop friendly workspace', 'Hot water', 'Washer'];
   for (let j = 0; j < items.length; j++) {
     if (items[j] === 'Wifi') {
       item = 'Wifi';
@@ -36,10 +36,7 @@ const generateBasic = (obj) => {
     } else if (items[j] === 'Washer') {
       item = 'Washer';
       description = 'In the building, free or for a fee';
-    } else if (items[j] === 'Essentials') {
-      item = 'Essentials';
-      description = 'Towels, bed sheets, soap, and toilet paper';
-    } else {
+    } else { 
       item = items[j];
       description = 'NULL';
     }
@@ -54,7 +51,7 @@ const generateBasic = (obj) => {
 const generateNotincluded = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 2;
-  const items = ['Wifi', 'TV', 'Iron', 'Air conditioning', 'Laptop friendly workspace', 'Heating', 'Hot water', 'Washer', 'Essentials'];
+  const items = ['Wifi', 'TV', 'Air conditioning', 'Laptop friendly workspace', 'Hot water', 'Washer'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
@@ -89,7 +86,7 @@ const generateGuestaccess = (obj) => {
 const generateBedandbath = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 4;
-  const items = ['Bed linens', 'Extra pillows', 'Hair dryer', 'Hangers', 'Shampoo'];
+  const items = ['Bed linens', 'Hangers', 'Shampoo'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
@@ -104,7 +101,7 @@ const generateBedandbath = (obj) => {
 const generateSafetyfeatures = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 5;
-  const items = ['Smoke detector', 'Fire extinguisher', 'Carbon monoxide detector', 'First aid kit'];
+  const items = ['Smoke detector', 'Fire extinguisher', 'Carbon monoxide detector'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
@@ -119,7 +116,7 @@ const generateSafetyfeatures = (obj) => {
 const generateFamilyfeatures = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 6;
-  const items = ['Bathtub', 'Room-darkening shades', 'Game console', 'Crib'];
+  const items = ['Bathtub', 'Crib', 'Game console'];
   for (let j = 0; j < items.length; j++) {
     item = items[j];
     description = 'NULL';
@@ -149,7 +146,7 @@ const generateOutdoor = (obj) => {
 const generateDining = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 8;
-  const items = ['Kitchen', 'Microwave', 'Coffee maker', 'Dishes', 'Stove', 'Oven'];
+  const items = ['Kitchen', 'Dishes', 'Stove',];
   for (let j = 0; j < items.length; j++) {
     if (items[j] === 'Kitchen') {
       item = 'Kitchen';
@@ -189,7 +186,7 @@ const generateLogistics = (obj) => {
 const generateFacilities = (obj) => {
   let item, description, line, allLines = '';
   const amen_cat_id = 10;
-  const items = ['Free parking', 'Hot tub', 'Free street parking', 'Pool', 'Gym'];
+  const items = ['Hot tub', 'Pool', 'Gym'];
   for (let j = 0; j < items.length; j++) {
     if (items[j] === 'Pool') {
       item = 'Pool';
@@ -359,8 +356,6 @@ const write1Time = () => {
   }
 
   finalData = data1 + data2 + data3 + data4 + data5 + data6 + data7 + data8 + data9 + data0;
-  console.log("i total:", idcount.i)
-  console.log(finalData);
 
   writer.write(finalData, 'utf8', (err) => {
     if (err) {

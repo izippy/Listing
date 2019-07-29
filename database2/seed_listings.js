@@ -121,7 +121,7 @@ const writeMaxTimes = () => {
       }
 
       // for long writes, check progress
-      if (i % 100000 === 0) {
+      if (i % 500000 === 0) {
         console.log(i);
       }
     }

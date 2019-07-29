@@ -6,20 +6,18 @@ let writer = fs.createWriteStream(csvname);
 let glistingcount = 0;
 
 // STEP 1: POSTGRES > connect izippy
-// STEP 2: 'node seed_listing.js' to (1) populate csv and (2) create table listing
+// STEP 2: 'node <seed_file.js>' to (1) populate csv and (2) create table
 // STEP 3: pv in new terminal to pipe in with progress bar outside of postgres
-  // pv /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/database2/listing.csv | psql -U cassandratong -d izippy -c "COPY listing FROM STDIN DELIMITERS '|';"
-
-// CREATE SCHEMAS/TABLES
-// let schemaListing = "DROP TABLE listing; CREATE TABLE IF NOT EXISTS listing (id INT NOT NULL PRIMARY KEY, title TEXT NOT NULL, location TEXT NOT NULL, user_id INT NOT NULL, type INT NOT NULL, bedrmnum INT NOT NULL, bathrmnum INT NOT NULL, guestmax INT NOT NULL, beds TEXT [] NOT NULL, bednum INT NOT NULL, general TEXT NOT NULL, space TEXT NOT NULL, guestaccess TEXT NOT NULL, interactionwithguests TEXT NOT NULL, otherthingstonote TEXT NOT NULL, license VARCHAR(15) NOT NULL);";
-// db.query(schemaListing, (err, res) => {
-//   if (err) {
-//     console.log("err", err);
-//   } else {
-//     console.log(`${csvname} table created`);
-//   }
-//   db.end();
-// });
+// pv /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/database2/amenities.csv | psql -U cassandratong -d izippy -c "COPY amenities FROM STDIN DELIMITERS '|';"
+let schema = "DROP TABLE IF EXISTS amenities; CREATE TABLE IF NOT EXISTS amenities (id INT NOT NULL PRIMARY KEY, amen_cat_id INT NOT NULL, item TEXT NOT NULL, description TEXT);";
+db.query(schema, (err, res) => {
+  if (err) {
+    console.log("err", err);
+  } else {
+    console.log(`${csvname} table created`);
+  }
+  db.end();
+});
 
 // helper functions to generate all amenities categories
 const generateBasic = (obj) => {

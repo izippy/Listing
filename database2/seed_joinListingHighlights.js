@@ -16,14 +16,15 @@ const makejoin_restlisting_highlights = (joinid, currlistingid, randhighlight) =
 
 const writeMaxTimes = () => {
   let currlistingid = 1; 
-  const lastlistingid = 100; // max is number of listings we need to join. 100 for now
+  const lastlistingid = 100;
+  const whilemax = lastlistingid + 1; // max is number of listings we need to join. 100 for now
   let joinid = 1;
   let ok = true;
 
   writeJoin();
 
   function writeJoin() {
-    while (currlistingid < lastlistingid) {
+    while (currlistingid < whilemax) {
       
       let alldata = '';
       // make first (required) highlight
@@ -56,7 +57,7 @@ const writeMaxTimes = () => {
         console.log(currlistingid);
       }
 
-      if (currlistingid === lastlistingid) {
+      if (currlistingid === whilemax) {
         writer.end();
       }
     }

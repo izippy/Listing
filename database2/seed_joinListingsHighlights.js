@@ -32,7 +32,7 @@ const makejoin_restlisting_highlights = (joinid, currlistingid, randhighlight) =
 
 const writeMaxTimes = () => {
   let currlistingid = 1; 
-  const lastlistingid = 10000;
+  const lastlistingid = 10000000;
   const whilemax = lastlistingid + 1; // max is number of listings we need to join. 100 for now
   let joinid = 1;
   let ok = true;
@@ -69,7 +69,7 @@ const writeMaxTimes = () => {
       }
 
       // for long writes, check progress
-      if (currlistingid % 100000 === 0) {
+      if (currlistingid % 500000 === 0) {
         console.log(currlistingid);
       }
 

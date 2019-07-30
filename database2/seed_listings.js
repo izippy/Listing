@@ -88,7 +88,7 @@ const generateListings = (i) => {
   const listingid = i + 1;
   const title = faker.lorem.words();
   const location = faker.address.city();
-  const user_id = faker.random.number({min:1, max:100000});
+  const user_id = Math.floor(Math.random() * 1000000) + 1;
   const type = faker.random.number({min:1, max:4}); // 4 types of places, see table unit_type
   const accomodations = generateAccomodation(type);
   const general = faker.lorem.sentences();

@@ -1,4 +1,5 @@
 node_modules
+cassandra-loader/
 .DS_Store
 database2/amenities.csv
 database2/amenitiesCategories.csv

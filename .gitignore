@@ -8,3 +8,6 @@ database2/joinListingsHighlights.csv
 database2/listings.csv
 database2/unitTypes.csv
 database2/users.csv
+database3/listings.csv
+database3/tail.csb
+database3/amenities.csv

@@ -50,10 +50,10 @@ const writeMaxTimes = () => {
       glistingcount++;
 
       // make other (optional) highlights. Add a random number (1, 2, or 3 more) of highlights (from ids 2 to 7)
-      let availablehighlights = [2, 3, 4, 5, 6, 7];
+      let availablehighlights = [2, 3, 4, 5, 6];
       let mixedhighlights = availablehighlights.sort(() => Math.random()-0.5); 
       let maxmixedhighlights = Math.floor(Math.random() * 3) + 1; // random number from 1 to 3
-      let usedhighlights = mixedhighlights.slice(0,maxmixedhighlights); // [2,5,7]
+      let usedhighlights = mixedhighlights.slice(0,maxmixedhighlights); // [2,5,6]
       for (let i = 0; i < usedhighlights.length; i++) {
         let otherdata = makejoin_restlisting_highlights(joinid, currlistingid, usedhighlights[i]);
         joinid++;

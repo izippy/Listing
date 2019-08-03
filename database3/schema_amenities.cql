@@ -16,8 +16,16 @@ CREATE TABLE IF NOT EXISTS amenities (
   categories TEXT,
   item TEXT,
   itemdescription TEXT,
-  PRIMARY KEY (id, categories, item),
-);
+  PRIMARY KEY (id, categories, item)
+) WITH CLUSTERING ORDER BY (categories ASC, item ASC);
+
+-- ALTER TABLE izippy.amenities 
+-- WITH compaction = { 'class' :  'LeveledCompactionStrategy'  };
+
+-- ALTER TABLE izippy.amenities 
+-- WITH caching = { 
+--    'keys' : 'NONE', 
+--    'rows_per_partition' : 'NONE' };
 
 -- copy over csv data to table, one at at a time
 -- COMPLETE: izippy.listings(  id INT, title TEXT, loc TEXT, users map<text, text>, detailtype TEXT, detailbedrmnum INT, detailbathrmnum INT, detailguestmax INT, detailbeds SET<text>, detailbednum INT, highlights map<text,varchar>  general TEXT, thespace TEXT, guestaccess TEXT, interactionwithguests TEXT, otherthingstonote TEXT, license VARCHAR, amencat_Basic_item TEXT, amencat_Not_included_item TEXT, amencat_Guest_access_item TEXT, amencat_Bed_and_bath_item TEXT, amencat_Safety_features_item TEXT, amencat_Family_features_item TEXT, amencat_Outdoor_item TEXT, amencat_Dining_item TEXT, amencat_Logistics_item TEXT, amencat_Facilities_item TEXT, PRIMARY KEY (id))"

@@ -37,6 +37,13 @@ CREATE TABLE IF NOT EXISTS listings (
   PRIMARY KEY (id)
 );
 
+ALTER TABLE izippy.listings 
+WITH compaction = { 'class' :  'LeveledCompactionStrategy'  };
+
+ALTER TABLE izippy.listings 
+WITH caching = { 
+   'keys' : 'NONE', 
+   'rows_per_partition' : 'NONE' };
 /* 
 -- create table
 -- INC AMENITIES

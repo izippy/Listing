@@ -12,3 +12,5 @@ database2/users.csv
 database3/listings.csv
 database3/tail.csb
 database3/amenities.csv
+newrelic.js
+newrelic_agent.log

@@ -139,9 +139,9 @@ const generateListings = (i) => {
   const highlights4 = `${highlightskeys[3]}: ${highlights[highlightskeys[3]]}`;
   const general = faker.lorem.sentences();
   const thespace = faker.lorem.sentences();
-  const guestaccess = faker.lorem.sentences();
+  const guestaccess = faker.lorem.sentence();
   const interactionwithguests = faker.lorem.sentences();
-  const otherthingstonote = faker.lorem.sentences();
+  const otherthingstonote = faker.lorem.sentence();
   const license = `STR-${faker.random.number({min:1000000, max:9999999})}`;
   // const amencat_basic1 = 'Wifi';
   // const amencat_basic2 = 'TV';

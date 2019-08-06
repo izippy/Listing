@@ -2,7 +2,7 @@ const fs = require('fs');
 const faker = require('faker');
 // const db = require('./index.js');
 
-let csvname = 'amenities.csv'
+let csvname = 'amenities4.csv'
 let writer = fs.createWriteStream(csvname);
 let glistingcount = 0;
 
@@ -22,7 +22,7 @@ const amenCategories = ['Basic', 'Not included','Guest access','Bed and bath','S
 // helper functions to generate all amenities categories
 const generateBasicOrNotIncluded = (currlistingid) => {
   let item, description, line, allLines = '';
-  const items = ['Hot water', 'Washer', 'Laptop friendly workspace', 'Air conditioning','TV' , 'Wifi'];
+  const items = ['Hot water', 'Laptop friendly workspace','TV' , 'Wifi'];
   while (items.length > 0) {
     let currentItem = items.pop();
     let category = faker.random.arrayElement(['Basic', 'Not included']);
@@ -52,7 +52,8 @@ const generateGuestaccess = (currlistingid) => {
   const items = ['Host greets you', 'Private entrance', 'Lockbox'];
   const sorteditems = items.sort(() => Math.random()-0.5);
   const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
-  const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  // const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  const selecteditems = sorteditems.slice(0,1) // end is not included
   for (let j = 0; j < selecteditems.length; j++) {
     if (items[j] === 'Private entrance') {
       item = 'Private entrance';
@@ -73,7 +74,8 @@ const generateBedandbath = (currlistingid) => {
   let item, description, line, allLines = '';
   const items = ['Bed linens', 'Hangers', 'Shampoo', 'Extra pillows'];
   const sorteditems = items.sort(() => Math.random()-0.5);
-  const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
+  // const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
+  const maxitemindex = Math.floor(Math.random() * 2); // random index up to length
   const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
   for (let j = 0; j < selecteditems.length; j++) {
     item = items[j];
@@ -91,7 +93,8 @@ const generateSafetyfeatures = (currlistingid) => {
   const items = ['Smoke detector', 'Fire extinguisher', 'Carbon monoxide detector', 'First aid kit'];
   const sorteditems = items.sort(() => Math.random()-0.5);
   const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
-  const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  // const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  const selecteditems = sorteditems.slice(0,1) // end is not included
   for (let j = 0; j < selecteditems.length; j++) {
     item = items[j];
     description = '*';
@@ -108,7 +111,8 @@ const generateFamilyfeatures = (currlistingid) => {
   const items = ['Bathtub', 'Crib', 'Game console'];
   const sorteditems = items.sort(() => Math.random()-0.5);
   const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
-  const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  // const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  const selecteditems = sorteditems.slice(0,1) // end is not included
   for (let j = 0; j < selecteditems.length; j++) {
     item = items[j];
     description = '*';
@@ -125,7 +129,8 @@ const generateOutdoor = (currlistingid) => {
   const items = ['Patio or balcony', 'Garden or backyard', 'BBQ grill'];
   const sorteditems = items.sort(() => Math.random()-0.5);
   const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
-  const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  // const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+  const selecteditems = sorteditems.slice(0,1) // end is not included
   for (let j = 0; j < selecteditems.length; j++) {
     item = items[j];
     description = '*';
@@ -141,7 +146,8 @@ const generateDining = (currlistingid) => {
   let item, description, line, allLines = '';
   const items = ['Kitchen', 'Dishes', 'Stove', 'Microwave', 'Coffee maker'];
   const sorteditems = items.sort(() => Math.random()-0.5);
-  const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
+  // const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
+  const maxitemindex = Math.floor(Math.random() * 3); // random index up to 3
   const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
   for (let j = 0; j < selecteditems.length; j++) {
     if (items[j] === 'Kitchen') {
@@ -159,54 +165,56 @@ const generateDining = (currlistingid) => {
   return allLines;
 };
 
-const generateLogistics = (currlistingid) => {
-  let item, description, line, allLines = '';
-  const items = ['Luggage dropoff', 'Long term stays'];
-  const sorteditems = items.sort(() => Math.random()-0.5);
-  const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
-  const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
-  for (let j = 0; j < selecteditems.length; j++) {
-    if (items[j] === 'Long term stays') {
-      item = 'Long term stays';
-      description = 'Allow stay for 28 days or more';
-    } else {
-      item = items[j];
-      description = '*';
-    }
-    line = `${currlistingid}|${'Logistics'}|${item}|${description}\n`;
-    allLines += line;
-    // obj.i++;
-    glistingcount++;
-  }
-  return allLines;
-};
+// const generateLogistics = (currlistingid) => {
+//   let item, description, line, allLines = '';
+//   const items = ['Luggage dropoff', 'Long term stays'];
+//   const sorteditems = items.sort(() => Math.random()-0.5);
+//   const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
+//   // const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+//   const selecteditems = sorteditems.slice(0,1) // end is not included
+//   for (let j = 0; j < selecteditems.length; j++) {
+//     if (items[j] === 'Long term stays') {
+//       item = 'Long term stays';
+//       description = 'Allow stay for 28 days or more';
+//     } else {
+//       item = items[j];
+//       description = '*';
+//     }
+//     line = `${currlistingid}|${'Logistics'}|${item}|${description}\n`;
+//     allLines += line;
+//     // obj.i++;
+//     glistingcount++;
+//   }
+//   return allLines;
+// };
 
-const generateFacilities = (currlistingid) => {
-  let item, description, line, allLines = '';
-  const items = ['Hot tub', 'Pool', 'Gym'];
-  const sorteditems = items.sort(() => Math.random()-0.5);
-  const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
-  const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
-  for (let j = 0; j < selecteditems.length; j++) {
-    if (items[j] === 'Pool') {
-      item = 'Pool';
-      description = 'Private or Shared';
-    } else if (items[j] === 'Gym') {
-      item = 'Gym';
-      description = 'Free, in the building or nearby';
-    } else {
-      item = items[j];
-      description = '*';
-    }
-    line = `${currlistingid}|${'Facilities'}|${item}|${description}\n`;
-    allLines += line;
-    // obj.i++;
-    glistingcount++;
-  }
-  return allLines;
-};
+// const generateFacilities = (currlistingid) => {
+//   let item, description, line, allLines = '';
+//   const items = ['Hot tub', 'Pool', 'Gym'];
+//   const sorteditems = items.sort(() => Math.random()-0.5);
+//   const maxitemindex = Math.floor(Math.random() * sorteditems.length); // random index up to length
+//   // const selecteditems = sorteditems.slice(0,maxitemindex) // end is not included
+//   const selecteditems = sorteditems.slice(0,1) // end is not included
+//   for (let j = 0; j < selecteditems.length; j++) {
+//     if (items[j] === 'Pool') {
+//       item = 'Pool';
+//       description = 'Private or Shared';
+//     } else if (items[j] === 'Gym') {
+//       item = 'Gym';
+//       description = 'Free, in the building or nearby';
+//     } else {
+//       item = items[j];
+//       description = '*';
+//     }
+//     line = `${currlistingid}|${'Facilities'}|${item}|${description}\n`;
+//     allLines += line;
+//     // obj.i++;
+//     glistingcount++;
+//   }
+//   return allLines;
+// };
 
-let currlistingid = 1; 
+let currlistingid = 7500001; 
 const writeMaxTimes = () => {
 
   const lastlistingid = 10000000;
@@ -228,11 +236,12 @@ const writeMaxTimes = () => {
         data5 = generateFamilyfeatures(currlistingid);
         data6 = generateOutdoor(currlistingid);
         data7 = generateDining(currlistingid);
-        data8 = generateLogistics(currlistingid);
-        data9 = generateFacilities(currlistingid);
+        // data8 = generateLogistics(currlistingid);
+        // data9 = generateFacilities(currlistingid);
       }
 
-      finalData = data1 + data2 + data3 + data4 + data5 + data6 + data7 + data8 + data9;
+      // finalData = data1 + data2 + data3 + data4 + data5 + data6 + data7 + data8 + data9;
+      finalData = data1 + data2 + data3 + data4 + data5 + data6 + data7;
       ok = writer.write(finalData, 'utf8');
       currlistingid++;
   

@@ -1,15 +1,16 @@
-//server
+const newrelic = require('newrelic');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 // const db = require('../database')
 const db = require('../database3')
+const rd = require('../redis');
 const port = 3005;
-const expressStaticGzip =require("express-static-gzip");
+const expressStaticGzip = require("express-static-gzip");
 const morgan = require('morgan');
 
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use('/:listingID',express.static("public"));
 // app.use('/:listingID', expressStaticGzip('public', {
 //     enableBrotli: true,
@@ -19,53 +20,83 @@ app.use('/:listingID',express.static("public"));
 //     }
 // }));
 
+// =========================================
+// WITH REDIS CACHE
+// =========================================
+// app.get('/listing/desc/:listingID', (req, res) => {
+// 	console.log('req.params.listingID: ', req.params.listingID)
+// 	const query = `SELECT * from listings WHERE id = ?`;
+// 	const params = [req.params.listingID];
+// 	const descRedisKey = `listing:desc${req.params.listingID}`;
+
+// 	return rd.get(descRedisKey, (err, data) => {
+// 		if (data) {
+// 			console.log('listing exists in redis')
+// 			return res.status(200).send(data);
+// 		} else {
+// 			console.log('query listing from db')
+// 			db.execute(query, params, { prepare: true })
+// 			.then(data => {
+// 				rd.setex(descRedisKey, 3600, JSON.stringify(data.rows[0]))
+// 				return res.send(data.rows)
+// 			})
+// 			.catch(() => res.status(500).send(err));
+// 		}
+// 	});
+// });
+
+// // check to see if amenities query result is in cache
+// app.get('/listing/amenity/:listingID', (req, res) => {
+// 	console.log('req.params.listingID: ', req.params.listingID)
+// 	const query = `SELECT * from amenities WHERE id = ?`;
+// 	const params = [req.params.listingID];
+// 	const amenityRedisKey = `listing:amenity${req.params.listingID}`;
+
+// 	return rd.get(amenityRedisKey, (err, data) => {
+// 		if (data) {
+// 			console.log('in redis for amenity')
+// 			res.status(200).send(data.rows);
+// 		} else {
+// 			console.log('query amenity from db')
+// 			db.execute(query, params, { prepare: true })
+// 			.then((data) => {
+// 				rd.setex(amenityRedisKey, 3600, JSON.stringify(data.rows))	
+// 				return res.send(data.rows)
+// 			})
+// 			.catch(err => {
+// 				console.error(err);
+// 				res.status(500).send(err);
+// 			})	// catch err
+// 		}
+// 	});
+// });
+
+// =========================================
+// WITHOUT REDIS CACHE
+// =========================================
 app.get('/listing/desc/:listingID', (req, res) => {
-	console.log('req.params.listingID: ', req.params.listingID)
+	console.log('desc req.params.listingID: ', req.params.listingID)
 	const query = `SELECT * from listings WHERE id = ?`;
 	const params = [req.params.listingID];
 
 	db.execute(query, params, { prepare: true })
-		.then(data => res.status(200).send(data.rows))
+		.then(data => res.status(200).send(data.rows[0]))
 		.catch(() => res.sendStatus(500));
-	// var id = req.params.listingID
-	// db.findDesc(id,(err,data)=>{
-	//     if(err){
-	//         res.status(500).send(err);
-	//     } else {
-	//         // console.log(data)
-	//         if (data.length) {
-	//             res.json(data[0])
-	//         } else {
-	//             res.status(500)
-	//         }
-	//     }        
-	// })
 })
 
 app.get('/listing/amenity/:listingID',(req,res)=>{
-
-	console.log('req.params.listingID: ', req.params.listingID)
+	console.log('amenity req.params.listingID: ', req.params.listingID)
 	const query = `SELECT * from amenities WHERE id = ?`;
 	const params = [req.params.listingID];
 
 	db.execute(query, params, { prepare: true })
 		.then(data => res.status(200).send(data.rows))
 		.catch(() => res.sendStatus(500));
-
-	// var id = req.params.listingID
-	// db.findAmen(id,(err,data)=>{
-	// 		if(err){
-	// 				res.status(500).send(err);
-	// 		} else {
-	// 				if (data.length) {
-	// 						res.json(data[0])
-	// 				} else {
-	// 						res.status(500)
-	// 				}
-	// 		}
-	// })
 });
 
+// =========================================
+// POST REQUESTS
+// =========================================
 app.post('/listing/desc/:listingID',(req,res)=>{
 	console.log('req.params.listingID: ', req.params)
 	const query = `INSERT into izippy.listings(id, title, loc, username, pic, detailtype, detailbedrmnum, detailbathrmnum, detailguestmax,\ 
@@ -102,6 +133,41 @@ app.post('/listing/amenity/:listingID',(req,res)=>{
 		.then(() => res.sendStatus(201));
 });
 
+// =========================================
+// YI'S OLD ENDPOINTS
+// =========================================
+// app.get('/listing/desc/:listingID', (req, res) => {
+// 	console.log('req.params.listingID: ', req.params.listingID);
+// 	var id = req.params.listingID;
+// 	db.findDesc(id,(err,data)=>{
+// 	    if(err){
+// 	        res.status(500).send(err);
+// 	    } else {
+// 	        // console.log(data)
+// 	        if (data.length) {
+// 	            res.json(data[0])
+// 	        } else {
+// 	            res.status(500)
+// 	        }
+// 	    }        
+// 	})
+// })
+
+// app.get('/listing/amenity/:listingID',(req,res)=>{
+// 	console.log('req.params.listingID: ', req.params.listingID);
+// 	var id = req.params.listingID;
+// 	db.findAmen(id,(err,data)=>{
+// 			if(err){
+// 					res.status(500).send(err);
+// 			} else {
+// 					if (data.length) {
+// 							res.json(data[0])
+// 					} else {
+// 							res.status(500)
+// 					}
+// 			}
+// 	})
+// });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 module.exports = app;

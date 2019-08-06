@@ -40,10 +40,12 @@ CREATE TABLE IF NOT EXISTS listings (
 ALTER TABLE izippy.listings 
 WITH compaction = { 'class' :  'LeveledCompactionStrategy'  };
 
-ALTER TABLE izippy.listings 
-WITH caching = { 
-   'keys' : 'NONE', 
-   'rows_per_partition' : 'NONE' };
+-- turn off cassandra caching if using redis 
+-- ALTER TABLE izippy.listings 
+-- WITH caching = { 
+--    'keys' : 'NONE', 
+--    'rows_per_partition' : 'NONE' };
+
 /* 
 -- create table
 -- INC AMENITIES
@@ -90,3 +92,9 @@ CREATE TABLE IF NOT EXISTS listings (
 
 -- SAMPLE QUERIES:
 -- GET ALL LISTINGS AND AMENITIES FOR id = 5;
+
+-- copy from csv data to table listings in cqlsh, one at a time
+scp -i "cassandra3.pem" /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/database3/listings.csv ec2-user@ec2-54-241-154-236.us-west-1.compute.amazonaws.com:~/
+
+-- within EC2, cqlsh, izippy database, copy from csv to cassandra database
+COPY listings (id, title, loc, username, pic, detailtype, detailbedrmnum, detailbathrmnum, detailguestmax, detailbeds, detailbednum, highlight1, highlight2, highlight3, highlight4, general, thespace, guestaccess, interactionwithguests, otherthingstonote, license) from '/home/ec2-user/listings.csv' WITH DELIMITER = '|' AND HEADER = 'false';

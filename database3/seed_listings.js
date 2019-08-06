@@ -3,7 +3,18 @@ const faker = require('faker');
 // const db = require('./index.js');
 
 let csvname = 'listings.csv'
-let writer = fs.createWriteStream(csvname);
+// let writer = fs.createWriteStream(csvname);
+writer0 = fs.createWriteStream('listings0.csv');
+writer1 = fs.createWriteStream('listings1.csv');
+writer2 = fs.createWriteStream('listings2.csv');
+writer3 = fs.createWriteStream('listings3.csv');
+writer4 = fs.createWriteStream('listings4.csv');
+writer5 = fs.createWriteStream('listings5.csv');
+writer6 = fs.createWriteStream('listings6.csv');
+writer7 = fs.createWriteStream('listings7.csv');
+writer8 = fs.createWriteStream('listings8.csv');
+writer9 = fs.createWriteStream('listings9.csv');
+writer10 = fs.createWriteStream('listings10.csv');
 let glistingcount = 0;
 
 // STEP 1: 'sh ../rundb.sh' to execute schema3.cql (use izippy, create table)
@@ -138,28 +149,12 @@ const generateListings = (i) => {
   const highlights3 = `${highlightskeys[2]}: ${highlights[highlightskeys[2]]}`;
   const highlights4 = `${highlightskeys[3]}: ${highlights[highlightskeys[3]]}`;
   const general = faker.lorem.sentences();
-  const thespace = faker.lorem.sentences();
-  const guestaccess = faker.lorem.sentence();
-  const interactionwithguests = faker.lorem.sentences();
-  const otherthingstonote = faker.lorem.sentence();
+  const thespace = '*';
+  const guestaccess = '*';
+  const interactionwithguests = '*';
+  const otherthingstonote = '*';
   const license = `STR-${faker.random.number({min:1000000, max:9999999})}`;
-  // const amencat_basic1 = 'Wifi';
-  // const amencat_basic2 = 'TV';
-  // const amencat_notincluded = 'Hot water';
-  // const amencat_guestaccess = 'Private entrance';
-  // const amencat_bedandbath = 'Bed linens';
-  // const amencat_safetyfeatures = 'Smoke detector';
-  // const amencat_familyfeatures = 'Crib';
-  // const amencat_outdoor = 'BBQ grill';
-  // const amencat_dining = 'Microwave';
-  // const amencat_logistics = 'Luggage dropoff';
-  // const amencat_facilities = 'Pool';
 
-//   const data = `${listingid}|${title}|${loc}|${username}|${pic}|${detailtype}|${accomodations.bedrmnum}|${accomodations.bathrmnum}|${accomodations.guestmax}|${accomodations.beds}|${accomodations.bednum}|\
-// ${highlights1}|${highlights2}|${highlights3}|${highlights4}|\
-// ${general}|${thespace}|${guestaccess}|${interactionwithguests}|${otherthingstonote}|${license}|\
-// ${amencat_basic1}|${amencat_basic2}|${amencat_notincluded}|${amencat_guestaccess}|${amencat_bedandbath}|${amencat_safetyfeatures}|\
-// ${amencat_familyfeatures}|${amencat_outdoor}|${amencat_dining}|${amencat_logistics}|${amencat_facilities}\n`;
   const data = `${listingid}|${title}|${loc}|${username}|${pic}|${detailtype}|\
 ${accomodations.bedrmnum}|${accomodations.bathrmnum}|${accomodations.guestmax}|${accomodations.beds}|${accomodations.bednum}|\
 ${highlights1}|${highlights2}|${highlights3}|${highlights4}|\
@@ -171,11 +166,46 @@ const writeMaxTimes = () => {
   const max = 10000000;
   let i = 0;
   let ok = true;
-  
+
   writeListings();
 
   function writeListings() {
+    let writer; 
     while (i < max) {
+      if (i < 500000) {
+        writer = writer0;
+      }
+      if (i > 500000 && i < 1000000) {
+        writer = writer1;
+      }
+      if (i >= 1000000 && i < 2000000) {
+        writer = writer2;
+      }
+      if (i >= 2000000 && i < 3000000) {
+        writer = writer3;
+      }
+      if (i >= 3000000 && i < 4000000) {
+        writer = writer4;
+      }
+      if (i >= 4000000 && i < 5000000) {
+        writer = writer5;
+      }
+      if (i >= 5000000 && i < 6000000) {
+        writer = writer6;
+      }
+      if (i >= 6000000 && i < 7000000) {
+        writer = writer7;
+      }
+      if (i >= 7000000 && i < 8000000) {
+        writer = writer8;
+      }
+      if (i >= 8000000 && i < 9000000) {
+        writer = writer9;
+      }
+      if (i >= 9000000 && i <= 10000000) {
+        writer = writer10;
+      }
+
       let data = generateListings(i);
       ok = writer.write(data, 'utf8');
       glistingcount++;
@@ -205,6 +235,6 @@ const writeMaxTimes = () => {
 
 writeMaxTimes();
 
-writer.on('finish', ()  => {
-  console.log(`${glistingcount} data written to ${csvname}`)
-});
+// writer.on('finish', ()  => {
+//   console.log(`${glistingcount} data written to ${csvname}`)
+// });

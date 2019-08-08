@@ -4,7 +4,7 @@ const faker = require('faker');
 
 let csvname = 'listings.csv'
 // let writer = fs.createWriteStream(csvname);
-writer0 = fs.createWriteStream('listings0.csv');
+// writer0 = fs.createWriteStream('listings0.csv');
 writer1 = fs.createWriteStream('listings1.csv');
 writer2 = fs.createWriteStream('listings2.csv');
 writer3 = fs.createWriteStream('listings3.csv');
@@ -172,10 +172,7 @@ const writeMaxTimes = () => {
   function writeListings() {
     let writer; 
     while (i < max) {
-      if (i < 500000) {
-        writer = writer0;
-      }
-      if (i > 500000 && i < 1000000) {
+      if (i < 1000000) {
         writer = writer1;
       }
       if (i >= 1000000 && i < 2000000) {

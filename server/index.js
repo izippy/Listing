@@ -1,15 +1,41 @@
-const newrelic = require('newrelic');
+// ===========================
+// FOR EC2 INSTANCE
+// ===========================
+// const newrelic = require('newrelic');
+// const express = require('express');
+// const app = express();
+// const bodyParser = require('body-parser');
+// const db = require('./database3/index.js');
+// const port = 3005;
+
+// ===========================
+// FOR LOCALHOST
+// ===========================
+require('newrelic');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 // const db = require('../database')
-const db = require('../database3')
+const db = require('../database3/index.js');
 const rd = require('../redis');
 const port = 3005;
 const expressStaticGzip = require("express-static-gzip");
 const morgan = require('morgan');
 
 app.use(bodyParser.json());
+// =========================================
+// ENDPOINT FOR LOADER.IO VERIFICATION
+//  ========================================
+app.get('/loaderio*', (req, res, next) => {
+	res.sendFile('/home/ec2-user/public/loaderio-4e9958e3d302f5d0effee161d8542d17.txt')
+	console.log('are we still serving up the bundle?');
+	next();
+});
+
+// =========================================
+// STANDARD ENDPOINTS
+// =========================================
+
 // app.use(morgan('dev'));
 app.use('/:listingID',express.static("public"));
 // app.use('/:listingID', expressStaticGzip('public', {
@@ -19,57 +45,6 @@ app.use('/:listingID',express.static("public"));
 //        res.setHeader("Cache-Control", "public, max-age=31536000");
 //     }
 // }));
-
-// =========================================
-// WITH REDIS CACHE
-// =========================================
-// app.get('/listing/desc/:listingID', (req, res) => {
-// 	console.log('req.params.listingID: ', req.params.listingID)
-// 	const query = `SELECT * from listings WHERE id = ?`;
-// 	const params = [req.params.listingID];
-// 	const descRedisKey = `listing:desc${req.params.listingID}`;
-
-// 	return rd.get(descRedisKey, (err, data) => {
-// 		if (data) {
-// 			console.log('listing exists in redis')
-// 			return res.status(200).send(data);
-// 		} else {
-// 			console.log('query listing from db')
-// 			db.execute(query, params, { prepare: true })
-// 			.then(data => {
-// 				rd.setex(descRedisKey, 3600, JSON.stringify(data.rows[0]))
-// 				return res.send(data.rows)
-// 			})
-// 			.catch(() => res.status(500).send(err));
-// 		}
-// 	});
-// });
-
-// // check to see if amenities query result is in cache
-// app.get('/listing/amenity/:listingID', (req, res) => {
-// 	console.log('req.params.listingID: ', req.params.listingID)
-// 	const query = `SELECT * from amenities WHERE id = ?`;
-// 	const params = [req.params.listingID];
-// 	const amenityRedisKey = `listing:amenity${req.params.listingID}`;
-
-// 	return rd.get(amenityRedisKey, (err, data) => {
-// 		if (data) {
-// 			console.log('in redis for amenity')
-// 			res.status(200).send(data.rows);
-// 		} else {
-// 			console.log('query amenity from db')
-// 			db.execute(query, params, { prepare: true })
-// 			.then((data) => {
-// 				rd.setex(amenityRedisKey, 3600, JSON.stringify(data.rows))	
-// 				return res.send(data.rows)
-// 			})
-// 			.catch(err => {
-// 				console.error(err);
-// 				res.status(500).send(err);
-// 			})	// catch err
-// 		}
-// 	});
-// });
 
 // =========================================
 // WITHOUT REDIS CACHE
@@ -132,6 +107,57 @@ app.post('/listing/amenity/:listingID',(req,res)=>{
 	db.batch(queries, { prepare: true })
 		.then(() => res.sendStatus(201));
 });
+
+// =========================================
+// WITH REDIS CACHE
+// =========================================
+// app.get('/listing/desc/:listingID', (req, res) => {
+// 	console.log('req.params.listingID: ', req.params.listingID)
+// 	const query = `SELECT * from listings WHERE id = ?`;
+// 	const params = [req.params.listingID];
+// 	const descRedisKey = `listing:desc${req.params.listingID}`;
+
+// 	return rd.get(descRedisKey, (err, data) => {
+// 		if (data) {
+// 			console.log('listing exists in redis')
+// 			return res.status(200).send(data);
+// 		} else {
+// 			console.log('query listing from db')
+// 			db.execute(query, params, { prepare: true })
+// 			.then(data => {
+// 				rd.setex(descRedisKey, 3600, JSON.stringify(data.rows[0]))
+// 				return res.send(data.rows)
+// 			})
+// 			.catch(() => res.status(500).send(err));
+// 		}
+// 	});
+// });
+
+// // check to see if amenities query result is in cache
+// app.get('/listing/amenity/:listingID', (req, res) => {
+// 	console.log('req.params.listingID: ', req.params.listingID)
+// 	const query = `SELECT * from amenities WHERE id = ?`;
+// 	const params = [req.params.listingID];
+// 	const amenityRedisKey = `listing:amenity${req.params.listingID}`;
+
+// 	return rd.get(amenityRedisKey, (err, data) => {
+// 		if (data) {
+// 			console.log('in redis for amenity')
+// 			res.status(200).send(data.rows);
+// 		} else {
+// 			console.log('query amenity from db')
+// 			db.execute(query, params, { prepare: true })
+// 			.then((data) => {
+// 				rd.setex(amenityRedisKey, 3600, JSON.stringify(data.rows))	
+// 				return res.send(data.rows)
+// 			})
+// 			.catch(err => {
+// 				console.error(err);
+// 				res.status(500).send(err);
+// 			})	// catch err
+// 		}
+// 	});
+// });
 
 // =========================================
 // YI'S OLD ENDPOINTS

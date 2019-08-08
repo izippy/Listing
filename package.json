@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run:webpack": "webpack -p --watch",
+    "build": "webpack -p --watch",
     "test": "jest --watchAll --coverage",
     "seed": "node server/db/seed.js",
     "db": "psql postgres < ./database2/schema.sql",
-    "start": "nodemon ./server/index.js",
+    "start": "node ./server/index.js",
+    "start:dev": "nodemon ./server/index.js",
+    "start:ec2": "nodemon index.js",
     "start:docker": "npm run db && npm run start",
     "k6": "k6 run script.js"
   },

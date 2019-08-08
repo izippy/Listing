@@ -32,27 +32,27 @@ class App extends React.Component {
 			contentType: 'application/json',
 			success: (desc)=>{
 				console.log(desc)
-				let host = {
-					host: desc.host,
-					pic: desc.pic,
-				};
+				// let host = {
+				// 	host: desc.host,
+				// 	pic: desc.pic,
+				// };
 
-				let hprop1 = desc.highlight1.split(':')[0];
-				let hprop2 = desc.highlight2.split(':')[0];
-				let hprop3 = desc.highlight3.split(':')[0];
-				let hprop4 = desc.highlight4.split(':')[0];
-				let highlights = {
-					[hprop1]: desc.highlight1.split(':')[1],
-					[hprop2]: desc.highlight2.split(':')[1],
-					[hprop3]: desc.highlight3.split(':')[1],
-					[hprop4]: desc.highlight4.split(':')[1],
-				}
+				// let hprop1 = desc.highlight1.split(':')[0];
+				// let hprop2 = desc.highlight2.split(':')[0];
+				// let hprop3 = desc.highlight3.split(':')[0];
+				// let hprop4 = desc.highlight4.split(':')[0];
+				// let highlights = {
+				// 	[hprop1]: desc.highlight1.split(':')[1],
+				// 	[hprop2]: desc.highlight2.split(':')[1],
+				// 	[hprop3]: desc.highlight3.split(':')[1],
+				// 	[hprop4]: desc.highlight4.split(':')[1],
+				// }
 
 				this.setState({
 					title: desc.title,
 					location: desc.loc,
-					host: host,
-					highlights: highlights,
+					host: desc.host,
+					highlights: desc.highlights,
 					desc: desc.desc,
 					detail: desc.detail    
 				});

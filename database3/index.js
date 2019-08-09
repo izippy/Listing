@@ -14,7 +14,6 @@ const cassandra = require('cassandra-driver');
 // const client = new cassandra.Client({ 
 //   // DB EC2 public IP: 54.241.154.236
 //   // DB EC2 private IP: 172.31.14.30
-//   // contactPoints: ['127.0.0.1:9042'], 
 //   contactPoints: ['54.241.154.236'], // defaults to 9042
 //   localDataCenter: 'datacenter1',
 //   keyspace: 'izippy',
@@ -24,7 +23,7 @@ const cassandra = require('cassandra-driver');
 // Client for Cluster2
 // ===================================
 const client = new cassandra.Client({ 
-  contactPoints: ['172.31.8.96, 13.57.181.226'], // defaults to 9042
+  contactPoints: ['54.183.9.213, 13.57.181.226'], // defaults to 9042
   localDataCenter: 'us-west',
   keyspace: 'izippy',
 });

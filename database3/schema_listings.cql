@@ -89,7 +89,7 @@ scp -i "Administrator-key-pair-uswest1.pem" /Users/cassandratong/Documents/gitHu
 scp -i "Administrator-key-pair-uswest1.pem" /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/package.json ec2-user@ec2-13-57-229-208.us-west-1.compute.amazonaws.com:~/
 
 -- loader.io authorization
-scp -i "Administrator-key-pair-uswest1.pem" /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/loaderio-4e9958e3d302f5d0effee161d8542d17.txt ec2-user@ec2-13-57-229-208.us-west-1.compute.amazonaws.com:~/
+scp -i "Administrator-key-pair-uswest1.pem" /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/loaderio-76d7ef9bf9df6428b9382685cfe887e2.txt ec2-user@ec2-13-57-229-208.us-west-1.compute.amazonaws.com:~/
 
 -- client folder (use -r flag)
 scp -i "Administrator-key-pair-uswest1.pem" -r /Users/cassandratong/Documents/gitHub/izippy/listing/Listing/client ec2-user@ec2-13-57-229-208.us-west-1.compute.amazonaws.com:~/

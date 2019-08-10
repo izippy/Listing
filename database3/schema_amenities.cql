@@ -56,3 +56,4 @@ scp -i "Administrator-key-pair-uswest1.pem" /Users/cassandratong/Documents/gitHu
 
 -- from cqlsh, copy over csv data from EC2 to cassandra database
 COPY amenities (id, categories, item, itemdescription) FROM '/home/ec2-user/amenities2.csv' WITH DELIMITER = '|' AND HEADER = 'false' AND CHUNKSIZE=2000 AND INGESTRATE=2000;
+

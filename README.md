@@ -7,7 +7,7 @@ System design of microservice for vacation rental description and amenities
 * Stress Testing: K6, Loader.io, New Relic
 
 ## API
-*Description*
+Description:
 
 | HTTP METHOD  | ENDPOINT                          | ACTION                                      |
 |:--------|:---------------------------------------|:--------------------------------------------|
@@ -18,7 +18,7 @@ System design of microservice for vacation rental description and amenities
 | DELETE  | `/api/rooms/listing/desc/:listingID`   | Delete a description for a listing          |
 
 
-*Amenity*
+Amenity:
 
 | HTTP METHOD  | ENDPOINT                          | ACTION                                   |
 |:--------|:---------------------------------------|:-----------------------------------------|

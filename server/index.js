@@ -21,8 +21,8 @@ const db = require('../database3/index.js');
 const port = 3005;
 const expressStaticGzip = require("express-static-gzip");
 const morgan = require('morgan');
-
 app.use(bodyParser.json());
+
 // =========================================
 // ENDPOINT FOR LOADER.IO VERIFICATION
 //  ========================================
@@ -35,16 +35,7 @@ app.get('/loaderio*', (req, res, next) => {
 // =========================================
 // STANDARD ENDPOINTS
 // =========================================
-
-// app.use(morgan('dev'));
 app.use('/:listingID',express.static("public"));
-// app.use('/:listingID', expressStaticGzip('public', {
-//     enableBrotli: true,
-//     orderPreference: ['br', 'gz'],
-//     setHeaders: function (res, path) {
-//        res.setHeader("Cache-Control", "public, max-age=31536000");
-//     }
-// }));
 
 // =========================================
 // WITHOUT REDIS CACHE
@@ -157,42 +148,6 @@ app.post('/listing/amenity/:listingID',(req,res)=>{
 // 			})	// catch err
 // 		}
 // 	});
-// });
-
-// =========================================
-// YI'S OLD ENDPOINTS
-// =========================================
-// app.get('/listing/desc/:listingID', (req, res) => {
-// 	console.log('req.params.listingID: ', req.params.listingID);
-// 	var id = req.params.listingID;
-// 	db.findDesc(id,(err,data)=>{
-// 	    if(err){
-// 	        res.status(500).send(err);
-// 	    } else {
-// 	        // console.log(data)
-// 	        if (data.length) {
-// 	            res.json(data[0])
-// 	        } else {
-// 	            res.status(500)
-// 	        }
-// 	    }        
-// 	})
-// })
-
-// app.get('/listing/amenity/:listingID',(req,res)=>{
-// 	console.log('req.params.listingID: ', req.params.listingID);
-// 	var id = req.params.listingID;
-// 	db.findAmen(id,(err,data)=>{
-// 			if(err){
-// 					res.status(500).send(err);
-// 			} else {
-// 					if (data.length) {
-// 							res.json(data[0])
-// 					} else {
-// 							res.status(500)
-// 					}
-// 			}
-// 	})
 // });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

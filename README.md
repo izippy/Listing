@@ -1,18 +1,11 @@
 # Description & Amenities
 
-## Features
-
 ## Tech Stack
 * Backend: Node.js, Express, AWS EC2, Nginx
 * Database: PostgreSQL, Cassandra
 * Stress Testing: K6, Loader.io, New Relic
 
 ## API
-*Serve static files*
-```
-rooms/listing/:listingID
-```
-
 *Description*
 
 | HTTP METHOD  | ENDPOINT                          | ACTION                                      |
@@ -41,13 +34,17 @@ Within root directory:
 # install dependencies
 npm install
 
-# seed mongo database
+# seed mysql database
+npm run db
 npm run seed
 
 # build webpack bundle
-npm run build:prod
+npm run build
 
 # run the app
 npm start
 ```
 
+## Related Projects
+* https://github.com/izippy/PhotoCarousel
+* https://github.com/izippy/Reservations

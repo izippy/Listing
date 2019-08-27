@@ -1,4 +1,5 @@
 # Description & Amenities
+System design of microservice for vacation rental description and amenities
 
 ## Tech Stack
 * Backend: Node.js, Express, AWS EC2, Nginx

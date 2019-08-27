@@ -35,7 +35,7 @@ Within root directory:
 # install dependencies
 npm install
 
-# seed mysql database
+# seed database
 npm run db
 npm run seed
 
